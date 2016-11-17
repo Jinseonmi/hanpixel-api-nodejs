@@ -31,7 +31,7 @@ module.exports = function(app, Book)
         var book = new Book();
         book.title = req.body.title;
         book.author = req.body.author;
-        book.published_date = new Date(req.body.published_date);
+        book.published_date = req.body.published_date;
 
         book.save(function(err){
             if(err){
@@ -53,30 +53,12 @@ module.exports = function(app, Book)
             if(!output.n) return res.status(404).json({ error: 'book not found' });
             res.json( { message: 'book updated' } );
         })
-    /* [ ANOTHER WAY TO UPDATE THE BOOK ]
-            Book.findById(req.params.book_id, function(err, book){
-            if(err) return res.status(500).json({ error: 'database failure' });
-            if(!book) return res.status(404).json({ error: 'book not found' });
-            if(req.body.title) book.title = req.body.title;
-            if(req.body.author) book.author = req.body.author;
-            if(req.body.published_date) book.published_date = req.body.published_date;
-            book.save(function(err){
-                if(err) res.status(500).json({error: 'failed to update'});
-                res.json({message: 'book updated'});
-            });
-        });
-    */
     });
 
     // DELETE BOOK
     app.delete('/api/books/:book_id', function(req, res){
         Book.remove({ _id: req.params.book_id }, function(err, output){
             if(err) return res.status(500).json({ error: "database failure" });
-
-            /* ( SINCE DELETE OPERATION IS IDEMPOTENT, NO NEED TO SPECIFY )
-            if(!output.result.n) return res.status(404).json({ error: "book not found" });
-            res.json({ message: "book deleted" });
-            */
 
             res.status(204).end();
         })
