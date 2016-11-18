@@ -4,7 +4,8 @@
 # 환경세팅
 ### Node.js + MongoDB
 
-테스트 웹 URL : http://52.198.201.69
+테스트 웹 URL : 로컬호스트 
+운영 웹 URL : http://52.198.201.69
 
 ## Node.js 설치
 
