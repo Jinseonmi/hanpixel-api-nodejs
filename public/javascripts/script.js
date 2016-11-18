@@ -48,19 +48,27 @@ $(document).ready(function(){
             dataType:'JSON',
             success:function(data){   
 
-                var tr = $('<tr>');
-                var td_book = $('<td>');
-                var td_name = $('<td>');
-                var td_time = $('<td>');
-                var td_del = $('<td>').addClass('del');
+                if ( data ) {
 
-                td_book.text(title);
-                td_name.text(author);
-                td_time.text(date);
-                td_del.text('삭제');
+                    var tr = $('<tr>');
+                    var td_book = $('<td>');
+                    var td_name = $('<td>');
+                    var td_time = $('<td>');
+                    var td_del = $('<td>').addClass('del');
 
-                tr.append(td_book).append(td_name).append(td_time).append(td_del);
-                $('#booklist table tbody').append(tr);
+                    tr.attr('id',data.result);
+                    td_book.text(title);
+                    td_name.text(author);
+                    td_time.text(date);
+                    td_del.text('삭제');
+
+                    tr.append(td_book).append(td_name).append(td_time).append(td_del);
+                    $('#booklist table tbody').append(tr);
+
+                    $('#book_title').val('');
+                    $('#book_name').val('');
+                    $('#book_time').val('');
+                }
             },   
             error:function(e){  
                 console.log(e);

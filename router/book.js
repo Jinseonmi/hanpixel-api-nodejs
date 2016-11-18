@@ -33,14 +33,15 @@ module.exports = function(app, Book)
         book.author = req.body.author;
         book.published_date = req.body.published_date;
 
-        book.save(function(err){
+        book.save(function(err,obj){
+
             if(err){
                 console.error(err);
                 res.json({result: 0});
                 return;
             }
 
-            res.json({result: 1});
+            res.json({result: obj._id});
 
         });
     });
